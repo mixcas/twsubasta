@@ -1,0 +1,45 @@
+<head>
+  <title>Twitsubasta</title>
+</head>
+
+<body>
+<h1>Twitsubasta</h1>
+  {{> loginButtons }}
+  {{> welcome }}
+  {{> auctionItems}}
+  {{> createAuctionItem}}
+</body>
+
+<template name="welcome">
+  <p>
+    Welcome to the example chat app! Please log in to show your username.
+  </p>
+</template>
+
+<template name="auctionItems">
+  {{#each auctionItems}}
+    <div class="auctionItem" data-bid-id="{{_id}}">
+      <h2>{{itemName}}</h2>
+      <p>{{itemDescription}}</p>
+      <p><strong>Starts: </strong>{{startDate}}</p>
+
+      {{#if currentUser}}
+      <input id="{{_id}}_bid" value="{{itemPaymentAmount}}" type="number"/><input id="{{_id}}_submit" class="bid-btn" type="submit" value="Bid!"/>
+      {{/if}}
+      <a href="#" class="delete-auction">Delete auction</a>
+    </div>
+  {{/each}}
+</template>
+
+<template name="createAuctionItem">
+  <h2>Add Auction Item</h2>
+  <form id="add-auction">
+    <label>Name: </label><input name="itemName"><br/>
+    <label>Desc: </label><textarea name="itemDescription"></textarea><br/>
+    <label>Start Date: </label><input type="date" name="startDate"><input type="time" name="startTime"><br/>
+    <label>Panned end date: </label><input type="date" name="plannedCloseDate"><input type="time" name="plannedCloseTime"><br/>
+    <label>Payment Producto: </label><input name="itemProductPayment"><br/>
+    <label>Reserve Price: </label><input type="number" name="itemReservePrice"><br/>
+    <input type="submit">
+  </form>
+</template>
